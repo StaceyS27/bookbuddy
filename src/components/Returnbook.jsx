@@ -1,4 +1,5 @@
 import { React } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDeleteReservationMutation } from "./API/bookBuddyApi";
 import { useSelector } from "react-redux";
@@ -8,6 +9,7 @@ import { useState } from "react";
 
 export default function Returnbook() {
   const params = useParams();
+  const navigate = useNavigate();
   const reservationId = params.id;
   const [success,setSuccess] = useState("")
 
@@ -16,7 +18,8 @@ export default function Returnbook() {
   async function deleteCheckOut() {
     const response = await deleteReservation(reservationId);
     console.log(response);
-    setSuccess("Deleted Reservation Successfully")
+    setSuccess("Deleted Reservation Successfully");
+    navigate("/Account");
   }
 
   return (
